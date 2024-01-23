@@ -4,9 +4,16 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use App\Models\ReporteAuditoriaEtiqueta;
+use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 
-class DatosExport implements FromCollection, WithMapping, WithHeadings
+
+class DatosExport implements FromCollection, WithMapping, WithEvents, WithStyles, WithCustomStartCell
 {
     protected $filtros;
 
@@ -87,6 +94,63 @@ class DatosExport implements FromCollection, WithMapping, WithHeadings
             'Tipo Defecto ID',
             'Estado',
             // ... encabezados para las otras columnas ...
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                // Ajustar el tamaño de las filas para la imagen y el título
+                $event->sheet->getRowDimension('1')->setRowHeight(40); // Ajusta la altura para la imagen
+                $event->sheet->getRowDimension('2')->setRowHeight(40); // Continuación de la imagen
+                $event->sheet->getRowDimension('3')->setRowHeight(20); // Espacio para el título
+    
+                // Agregar imagen
+                $drawing = new Drawing();
+                $drawing->setPath(public_path('\images\logo.png')); // Ruta a la imagen
+                $drawing->setHeight(80); // Altura de la imagen
+                $drawing->setCoordinates('A1'); // Ubicación de la imagen en la hoja
+                $drawing->setWorksheet($event->sheet->getDelegate());
+    
+                // Agregar título
+                $event->sheet->mergeCells('A3:D3'); // Fusionar celdas para el título
+                $event->sheet->setCellValue('A3', 'REPORTE AUDITORIA DE ETIQUETAS');
+                $event->sheet->getStyle('A3')->getFont()->setSize(14);
+                // Mover los encabezados de la tabla hacia abajo
+                // Asegúrate de ajustar las coordenadas en tus otros métodos (headings, map) si es necesario
+                // Escribir los encabezados manualmente en la fila 5
+                $encabezados = [
+                    'Estilo ID', 'No. Recibo ID', 'Talla Cantidad ID', 
+                    'Tamaño Muestra ID', 'Defecto ID', 'Tipo Defecto ID', 'Estado'
+                ];
+
+                $columna = 'A';
+                $fila = 5; // La fila donde comienzan los encabezados
+                foreach ($encabezados as $encabezado) {
+                    $event->sheet->setCellValue($columna.$fila, $encabezado);
+                    $columna++; // Avanza a la siguiente columna
+                }
+
+                $event->sheet->getStyle('A5:G5')->getFont()->setBold(true);
+            },
+            ];
+    }
+
+    /**
+     * @return string
+     */
+    public function startCell(): string
+    {
+        return 'A6';
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            // Estilos para los encabezados
+            'A2'  => ['font' => ['bold' => true]], // Asumiendo que los encabezados comienzan en la fila 2
+            // Puedes agregar más estilos aquí
         ];
     }
 }
