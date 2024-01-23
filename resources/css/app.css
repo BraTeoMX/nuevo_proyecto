@@ -1,0 +1,11 @@
+/* app.css */
+
+
+/* Agrega una clase personalizada para el navbar */
+
+.custom-navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
