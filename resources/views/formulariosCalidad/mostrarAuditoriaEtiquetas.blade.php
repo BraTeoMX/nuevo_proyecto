@@ -53,7 +53,7 @@
                                                 <select name="cliente" id="cliente" class="form-select" required title="Por favor, selecciona una opción">
                                                     <option value="">Selecciona una opción</option>
                                                     @foreach ($CategoriaCliente as $cliente)
-                                                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                                                        <option value="{{ $cliente->id }}" @if(request('cliente') == $cliente->id) selected @endif>{{ $cliente->nombre }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -64,7 +64,7 @@
                                                 <select name="estilo" id="estilo" class="form-select" title="Por favor, selecciona una opción">
                                                     <option value="">Selecciona una opción</option>
                                                     @foreach ($CategoriaEstilo as $estilo)
-                                                        <option value="{{ $estilo->id }}">{{ $estilo->nombre }}</option>
+                                                        <option value="{{ $estilo->id }}" @if(request('estilo') == $estilo->id) selected @endif>{{ $estilo->nombre }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -75,7 +75,7 @@
                                                 <select name="no_recibo" id="no_recibo" class="form-select" title="Por favor, selecciona una opción">
                                                     <option value="">Selecciona una opción</option>
                                                     @foreach ($CategoriaNoRecibo as $no_recibo)
-                                                        <option value="{{ $no_recibo->id }}">{{ $no_recibo->nombre }}</option>
+                                                        <option value="{{ $no_recibo->id }}" @if(request('no_recibo') == $no_recibo->id) selected @endif>{{ $no_recibo->nombre }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -83,11 +83,11 @@
                                         <div class="row mb-3">
                                             <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
                                             <div class="col-sm-9">
-                                                <input type="date" name="fecha" id="fecha" class="form-control">
+                                                <input type="date" name="fecha" id="fecha" class="form-control" value="{{ request('fecha') }}">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Filtrar Datos</button>
-                                    </form>
+                                    </form>                                    
                                 </div>
                                 <hr>
                                 @if($mostrarAuditoriaEtiquetas->isEmpty())
