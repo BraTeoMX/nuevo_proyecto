@@ -87,6 +87,7 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Filtrar Datos</button>
+                                        <button type="submit" formaction="{{ route('exportar-excel') }}" class="btn btn-success">Exportar a Excel</button>
                                     </form>                                    
                                 </div>
                                 <hr>

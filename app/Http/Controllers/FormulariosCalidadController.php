@@ -12,6 +12,9 @@ use App\Models\CategoriaDefecto;
 use App\Models\CategoriaTipoDefecto;
 use App\Models\ReporteAuditoriaEtiqueta;
 
+use App\Exports\DatosExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class FormulariosCalidadController extends Controller
 {
     public function auditoriaEtiquetas()
@@ -96,6 +99,19 @@ class FormulariosCalidadController extends Controller
 
         // Pasar los datos filtrados a la vista
         return view('formulariosCalidad.mostrarAuditoriaEtiquetas', compact('mostrarAuditoriaEtiquetas', 'CategoriaCliente', 'CategoriaEstilo', 'CategoriaNoRecibo'));
+    }
+
+    public function exportarExcel(Request $request) 
+    {
+        $filtros = [
+            'cliente' => $request->get('cliente'),
+            'estilo' => $request->get('estilo'),
+            'no_recibo' => $request->get('no_recibo'),
+            'fecha' => $request->get('fecha'),
+            // ... otros filtros que puedas tener
+        ];
+
+        return Excel::download(new DatosExport($filtros), 'datos.xlsx');
     }
 
 }

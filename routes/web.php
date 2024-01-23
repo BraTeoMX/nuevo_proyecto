@@ -33,4 +33,8 @@ Route::post('/formAuditoriaEtiquetas', [FormulariosCalidadController::class, 'fo
 //Apartado para el formulario para mostrar datos filtrados 
 Route::get('/filtrarDatosEtiquetas', [FormulariosCalidadController::class, 'filtrarDatosEtiquetas'])->name('formulariosCalidad.filtrarDatosEtiquetas');
 
+//aparado para exportar el archivo de excel 
+Route::get('/exportar-excel', [FormulariosCalidadController::class, 'exportarExcel'])->name('exportar-excel');
+
+
 
