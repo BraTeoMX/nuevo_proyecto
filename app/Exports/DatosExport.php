@@ -1,6 +1,7 @@
 <?php
 namespace App\Exports;
 
+use App\Models\CategoriaCliente;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -109,14 +110,25 @@ class DatosExport implements FromCollection, WithMapping, WithEvents, WithStyles
                 // Agregar imagen
                 $drawing = new Drawing();
                 $drawing->setPath(public_path('\images\logo.png')); // Ruta a la imagen
-                $drawing->setHeight(80); // Altura de la imagen
+                $drawing->setHeight(100); // Altura de la imagen
                 $drawing->setCoordinates('A1'); // Ubicación de la imagen en la hoja
                 $drawing->setWorksheet($event->sheet->getDelegate());
     
                 // Agregar título
-                $event->sheet->mergeCells('A3:D3'); // Fusionar celdas para el título
-                $event->sheet->setCellValue('A3', 'REPORTE AUDITORIA DE ETIQUETAS');
-                $event->sheet->getStyle('A3')->getFont()->setSize(14);
+                $event->sheet->mergeCells('E1:I1'); // Fusionar celdas para el título
+                $event->sheet->setCellValue('E1', 'REPORTE AUDITORIA DE ETIQUETAS');
+                $event->sheet->getStyle('E1')->getFont()->setSize(20);
+
+                // Agregar Cliente
+                $event->sheet->mergeCells('A3:B3'); // Fusionar celdas para el cliente
+                $clienteId = $this->filtros['cliente'];
+                $cliente = 'Cliente: ' . CategoriaCliente::find($clienteId)->nombre; // Suponiendo que el nombre del cliente está en el campo 'nombre' de la tabla 'clientes'
+                $event->sheet->setCellValue('A3', $cliente);
+
+                // Agregar Fecha
+                $event->sheet->mergeCells('E3:F3'); // Fusionar celdas para la fecha
+                $fecha = 'Fecha: ' . date('d - m - Y', strtotime($this->filtros['fecha'])); // Formatear la fecha en formato numérico
+                $event->sheet->setCellValue('E3', $fecha);
                 // Mover los encabezados de la tabla hacia abajo
                 // Asegúrate de ajustar las coordenadas en tus otros métodos (headings, map) si es necesario
                 // Escribir los encabezados manualmente en la fila 5
@@ -149,7 +161,7 @@ class DatosExport implements FromCollection, WithMapping, WithEvents, WithStyles
     {
         return [
             // Estilos para los encabezados
-            'A2'  => ['font' => ['bold' => true]], // Asumiendo que los encabezados comienzan en la fila 2
+            'A5'  => ['font' => ['bold' => true]], // Asumiendo que los encabezados comienzan en la fila 2
             // Puedes agregar más estilos aquí
         ];
     }
