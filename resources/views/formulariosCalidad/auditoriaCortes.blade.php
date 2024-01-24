@@ -57,7 +57,12 @@
                                         <!--Este apartado debe ser modificado despues -->
                                         <label for="estilo" class="col-sm-3 col-form-label">ESTILO</label>
                                         <div class="col-sm-12">
-                                            <input type="number" class="form-control" name="estilo" id="estilo" placeholder="..." required />
+                                            <select name="nombre" id="nombre" class="form-select" required title="Por favor, selecciona una opción">
+                                                <option value="">Selecciona una opción</option>
+                                                @foreach ($CategoriaEstilo as $estilo)
+                                                    <option value="{{ $estilo->id }}">{{ $estilo->nombre }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -527,6 +532,136 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
+                                            <label for="codigo_material" class="col-sm-6 col-form-label">4.  Sellado de paquetes</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado1" value="1" required>
+                                                    <label class="form-check-label" for="estado1"> ✔ </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado2" value="0" required>
+                                                    <label class="form-check-label" for="estado2"> ✖ </label>
+                                                </div>
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder="Pcs." required />
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="codigo_material" class="col-sm-6 col-form-label">Piezas inspeccionadas</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="codigo_material" class="col-sm-6 col-form-label">Defectos</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="codigo_material" class="col-sm-6 col-form-label">Porcentaje</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="codigo_material" class="col-sm-6 col-form-label">Firma de Aprobado</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div style="background: #18b420a2">
+                                        <h4 style="text-align: center">AUDITORIA EN BULTOS</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombre" class="col-sm-3 col-form-label">NOMBRE</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <select name="nombre" id="nombre" class="form-select" required title="Por favor, selecciona una opción">
+                                                    <option value="">Selecciona una opción</option>
+                                                    @foreach ($CategoriaAuditor as $auditor)
+                                                        <option value="{{ $auditor->id }}">{{ $auditor->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombre" class="col-sm-3 col-form-label">Fecha</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                {{ now()->format('d ') . $mesesEnEspanol[now()->format('n') - 1] . now()->format(' Y') }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="mesa" class="col-sm-3 col-form-label">MESA</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <select name="mesa" id="mesa" class="form-select" required title="Por favor, selecciona una opción">
+                                                    <option value="">Selecciona una opción</option>
+                                                    @foreach ($CategoriaAuditor as $auditor)
+                                                        <option value="{{ $auditor->id }}">{{ $auditor->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombre" class="col-sm-3 col-form-label">NOMBRE</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <select name="nombre" id="nombre" class="form-select" required title="Por favor, selecciona una opción">
+                                                    <option value="">Selecciona una opción</option>
+                                                    @foreach ($CategoriaAuditor as $auditor)
+                                                        <option value="{{ $auditor->id }}">{{ $auditor->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="simetria_pieza" class="col-sm-6 col-form-label">1.  Cantidad de bultos</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado1" value="1" required>
+                                                    <label class="form-check-label" for="estado1"> ✔ </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado2" value="0" required>
+                                                    <label class="form-check-label" for="estado2"> ✖ </label>
+                                                </div>
+                                                <input type="text" class="form-control me-2" name="simetria_pieza_pcs" id="simetria_pieza_pcs" placeholder="Pcs." required />
+                                                <input type="text" class="form-control me-2" name="simetria_pieza" id="simetria_pieza" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="codigo_material" class="col-sm-6 col-form-label">2.  Piezas por paquete</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado1" value="1" required>
+                                                    <label class="form-check-label" for="estado1"> ✔ </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado2" value="0" required>
+                                                    <label class="form-check-label" for="estado2"> ✖ </label>
+                                                </div>
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder="Pcs." required />
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="codigo_material" class="col-sm-6 col-form-label">3.  Encojimiento</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado1" value="1" required>
+                                                    <label class="form-check-label" for="estado1"> ✔ </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado2" value="0" required>
+                                                    <label class="form-check-label" for="estado2"> ✖ </label>
+                                                </div>
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder="Pcs." required />
+                                                <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
                                             <label for="codigo_material" class="col-sm-6 col-form-label">4. Ingreso de tikets</label>
                                             <div class="col-sm-12 d-flex align-items-center">
                                                 <div class="form-check form-check-inline">
@@ -563,6 +698,60 @@
                                             <label for="codigo_material" class="col-sm-6 col-form-label">Firma de Aprobado</label>
                                             <div class="col-sm-12 d-flex align-items-center">
                                                 <input type="text" class="form-control me-2" name="codigo_material" id="codigo_material" placeholder=" COMENTARIOS" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div style="background: #3518b4a2">
+                                        <h4 style="text-align: center">AUDITORIA EN BULTOS</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombre" class="col-sm-3 col-form-label">AUDTORIA FINAL</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <select name="nombre" id="nombre" class="form-select" required title="Por favor, selecciona una opción">
+                                                    <option value="">Selecciona una opción</option>
+                                                    @foreach ($CategoriaAuditor as $auditor)
+                                                        <option value="{{ $auditor->id }}">{{ $auditor->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombre" class="col-sm-3 col-form-label"> </label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <div class="form-check form-check-inline">
+                                                    <label class="form-check-label" for="estado1">APROBADO </label>
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado1" value="1" required>
+                                                    
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <label class="form-check-label" for="estado2"> RECHAZADO </label>
+                                                    <input class="form-check-input" type="radio" name="estado" id="estado2" value="0" required>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombre" class="col-sm-6 col-form-label">SUPERVUSOR DE CORTE</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <select name="nombre" id="nombre" class="form-select" required title="Por favor, selecciona una opción">
+                                                    <option value="">Selecciona una opción</option>
+                                                    @foreach ($CategoriaAuditor as $auditor)
+                                                        <option value="{{ $auditor->id }}">{{ $auditor->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombre" class="col-sm-6 col-form-label">SUPERVUSOR DE LINEA</label>
+                                            <div class="col-sm-12 d-flex align-items-center">
+                                                <select name="nombre" id="nombre" class="form-select" required title="Por favor, selecciona una opción">
+                                                    <option value="">Selecciona una opción</option>
+                                                    @foreach ($CategoriaAuditor as $auditor)
+                                                        <option value="{{ $auditor->id }}">{{ $auditor->nombre }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
