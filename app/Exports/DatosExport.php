@@ -115,7 +115,7 @@ class DatosExport implements FromCollection, WithMapping, WithEvents, WithStyles
                 $drawing->setWorksheet($event->sheet->getDelegate());
     
                 // Agregar título
-                $event->sheet->mergeCells('E1:I1'); // Fusionar celdas para el título
+                $event->sheet->mergeCells('E1:K1'); // Fusionar celdas para el título
                 $event->sheet->setCellValue('E1', 'REPORTE AUDITORIA DE ETIQUETAS');
                 $event->sheet->getStyle('E1')->getFont()->setSize(20);
 
@@ -127,7 +127,11 @@ class DatosExport implements FromCollection, WithMapping, WithEvents, WithStyles
 
                 // Agregar Fecha
                 $event->sheet->mergeCells('E3:F3'); // Fusionar celdas para la fecha
+                if($this->filtros['fecha'] == NULL){
+                    $fecha = 'Fecha: NULL' ; // Formatear la fecha en formato numérico
+                }else{ 
                 $fecha = 'Fecha: ' . date('d - m - Y', strtotime($this->filtros['fecha'])); // Formatear la fecha en formato numérico
+                }
                 $event->sheet->setCellValue('E3', $fecha);
                 // Mover los encabezados de la tabla hacia abajo
                 // Asegúrate de ajustar las coordenadas en tus otros métodos (headings, map) si es necesario
