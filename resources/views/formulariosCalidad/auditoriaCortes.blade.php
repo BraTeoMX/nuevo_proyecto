@@ -755,9 +755,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    
                                 </div>
+                                <hr>
                                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                                 <!--Fin de la edicion del codigo para mostrar el contenido-->
                             </div>
