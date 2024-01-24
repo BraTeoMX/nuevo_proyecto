@@ -41,7 +41,7 @@
                                 <h2>EVALUACION  DE CORTE CONTRA PATRON</h2>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('formulariosCalidad.formAuditoriaCortes') }}"> 
+                        <form method="POST" action="{{ route('formulariosCalidad.formEvaluacionCorte') }}"> 
                             @csrf
                             <hr>
                             <div class="card-body">
@@ -51,18 +51,6 @@
                                         <label for="fecha" class="col-sm-3 col-form-label">FECHA</label>
                                         <div class="col-sm-12">
                                             {{ now()->format('d ') . $mesesEnEspanol[now()->format('n') - 1] . now()->format(' Y') }}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <!--Este apartado debe ser modificado despues -->
-                                        <label for="no_recibo" class="col-sm-3 col-form-label">AREA</label>
-                                        <div class="col-sm-12">
-                                            <select name="no_recibo" id="no_recibo" class="form-select" required title="Por favor, selecciona una opción">
-                                                <option value="">Selecciona una opción</option>
-                                                @foreach ($CategoriaNoRecibo as $no_recibo)
-                                                    <option value="{{ $no_recibo->id }}">{{ $no_recibo->nombre }}</option>
-                                                @endforeach
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -77,52 +65,52 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="talla_cantidad" class="col-sm-3 col-form-label">TURNO</label>
+                                        <!--Este apartado debe ser modificado despues -->
+                                        <label for="descripcion" class="col-sm-3 col-form-label">DESCRIPCION</label>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control" name="talla_cantidad" id="talla_cantidad" placeholder="Ingresa talla " required title="Por favor, selecciona una opción" oninput="this.value = this.value.toUpperCase()">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="supervisor" class="col-sm-3 col-form-label">SUPERVISOR</label>
-                                        <div class="col-sm-12">
-                                            <input type="number" class="form-control" name="supervisor" id="supervisor" placeholder="Ingresa Tamaño de supervisor" required title="Por favor, selecciona una opción"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="tipo_defecto" class="col-sm-3 col-form-label">AUDITOR</label>
-                                        <div class="col-sm-12">
-                                            <select name="tipo_defecto" id="tipo_defecto" class="form-select" required title="Por favor, selecciona una opción">
-                                                <option value="">Selecciona una opción</option>
-                                                @foreach ($CategoriaTipoDefecto as $tipo_defecto)
-                                                    <option value="{{ $tipo_defecto->id }}">{{ $tipo_defecto->nombre }}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="text" class="form-control me-2" name="descripcion" id="descripcion" placeholder=" COMENTARIOS" required />
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
-                                <div>
-                                    <div class="row mb-3">
-                                        <!--Este apartado debe ser modificado despues -->
-                                        <label for="nombre" class="col-sm-3 col-form-label">NOMBRE</label>
-                                        <div class="col-sm-9">
-                                            <select name="no_recibo" id="no_recibo" class="form-select" required title="Por favor, selecciona una opción">
-                                                <option value="">Selecciona una opción</option>
-                                                @foreach ($CategoriaNoRecibo as $no_recibo)
-                                                    <option value="{{ $no_recibo->id }}">{{ $no_recibo->nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="operacion" class="col-sm-3 col-form-label">OPERACION</label>
-                                        <div class="col-sm-9">
-                                            <select name="estilo" id="estilo" class="form-select" required title="Por favor, selecciona una opción">
+                                <div class="row">
+                                    <h5 style="text-align: center">IZQUIERDA</h5>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="izquierda_x" class="col-sm-6 col-form-label">X </label>
+                                        <div class="col-sm-12">
+                                            <select name="izquierda_x" id="izquierda_x" class="form-select" required title="Por favor, selecciona una opción">
                                                 <option value="">Selecciona una opción</option>
                                                 @foreach ($CategoriaEstilo as $estilo)
                                                     <option value="{{ $estilo->id }}">{{ $estilo->nombre }}</option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="izquierda_y" class="col-sm-3 col-form-label">Y </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="izquierda_y" id="izquierda_y" placeholder="Ingresa y " required title="Por favor, selecciona una opción" oninput="this.value = this.value.toUpperCase()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <h5 style="text-align: center">DERECHA</h5>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="derecha_x" class="col-sm-6 col-form-label">X </label>
+                                        <div class="col-sm-12">
+                                            <select name="derecha_x" id="derecha_x" class="form-select" required title="Por favor, selecciona una opción">
+                                                <option value="">Selecciona una opción</option>
+                                                @foreach ($CategoriaEstilo as $estilo)
+                                                    <option value="{{ $estilo->id }}">{{ $estilo->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="derecha_y" class="col-sm-3 col-form-label">Y </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="derecha_y" id="derecha_y" placeholder="Ingresa y " required title="Por favor, selecciona una opción" oninput="this.value = this.value.toUpperCase()">
                                         </div>
                                     </div>
                                 </div>
