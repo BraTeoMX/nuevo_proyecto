@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\CategoriaAuditor;
 use App\Models\CategoriaCliente;
 use App\Models\CategoriaEstilo;
 use App\Models\CategoriaNoRecibo;
@@ -117,6 +118,7 @@ class FormulariosCalidadController extends Controller
 
     public function auditoriaCortes()
     {
+        $CategoriaAuditor = CategoriaAuditor::where('estado', 1)->get();
         $CategoriaCliente = CategoriaCliente::where('estado', 1)->get();
         $CategoriaEstilo = CategoriaEstilo::where('estado', 1)->get();
         $CategoriaNoRecibo = CategoriaNoRecibo::where('estado', 1)->get();
@@ -135,7 +137,7 @@ class FormulariosCalidadController extends Controller
 
         return view('formulariosCalidad.auditoriaCortes', compact('mesesEnEspanol', 'CategoriaCliente', 
                 'CategoriaEstilo', 'CategoriaNoRecibo', 'CategoriaTallaCantidad', 'CategoriaTamañoMuestra', 
-                'CategoriaDefecto', 'CategoriaTipoDefecto'));
+                'CategoriaDefecto', 'CategoriaTipoDefecto', 'CategoriaAuditor'));
     }
 
     public function formAuditoriaCortes(Request $request)

@@ -38,7 +38,10 @@ class ReporteAuditoriaEtiqueta extends Model
     {
         return $this->belongsTo(CategoriaTipoDefecto::class, 'tipo_defecto_id');
     }
-
+    public function categoriaAuditor()
+    {
+        return $this->belongsTo(CategoriaTipoDefecto::class, 'auditor_id');
+    }
 
 
 }
