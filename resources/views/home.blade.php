@@ -26,7 +26,7 @@
                                         <img src="images/Intimark.png" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">AUDITORIA EN PROCESO DE CORTE <br>FCC-004</h5>
-                                            <a href="{{ route('reporte_etiqueta') }}" class="btn btn-primary" target="_blank">INICIAR</a>
+                                            <a href="{{ route('formulariosCalidad.auditoriaCortes') }}" class="btn btn-primary" target="_blank">INICIAR</a>
                                         </div>
                                     </div>
                                 </div>
