@@ -25,7 +25,7 @@
                                     <div class="card">
                                         <img src="images/Intimark.png" class="card-img-top" alt="...">
                                         <div class="card-body">
-                                            <h5 class="card-title">AUDITORIA EN PROCESO DE CORTE <br>FCC-004</h5>
+                                            <h5 class="card-title">CONTROL DE CALIDAD EN CORTE <br>FCC-010</h5>
                                             <a href="{{ route('formulariosCalidad.auditoriaCortes') }}" class="btn btn-primary" target="_blank">INICIAR</a>
                                         </div>
                                     </div>
@@ -34,8 +34,8 @@
                                     <div class="card">
                                         <img src="images/Intimark.png" class="card-img-top" alt="...">
                                         <div class="card-body">
-                                            <h5 class="card-title">REPORTE DE AUDITORIA EN CORTE <br>FCC-03</h5>
-                                            <a href="{{ route('reporte_etiqueta') }}" class="btn btn-primary" target="_blank">INICIAR</a>
+                                            <h5 class="card-title">EVALUACION  DE CORTE CONTRA PATRON <br>F-4</h5>
+                                            <a href="{{ route('formulariosCalidad.evaluacionCorte') }}" class="btn btn-primary" target="_blank">INICIAR</a>
                                         </div>
                                     </div>
                                 </div>

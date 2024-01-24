@@ -38,7 +38,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h2>CONTROL DE CALIDAD EN CORTE</h2>
+                                <h2>EVALUACION  DE CORTE CONTRA PATRON</h2>
                             </div>
                         </div>
                         <form method="POST" action="{{ route('formulariosCalidad.formAuditoriaCortes') }}"> 

@@ -165,4 +165,54 @@ class FormulariosCalidadController extends Controller
         return back()->with('success', 'Datos guardados correctamente.');
     }
 
+
+    public function evaluacionCorte()
+    {
+        $CategoriaAuditor = CategoriaAuditor::where('estado', 1)->get();
+        $CategoriaCliente = CategoriaCliente::where('estado', 1)->get();
+        $CategoriaEstilo = CategoriaEstilo::where('estado', 1)->get();
+        $CategoriaNoRecibo = CategoriaNoRecibo::where('estado', 1)->get();
+        $CategoriaTallaCantidad = CategoriaTallaCantidad::where('estado', 1)->get();
+        $CategoriaTamañoMuestra = CategoriaTamañoMuestra::where('estado', 1)->get();
+        $CategoriaDefecto = CategoriaDefecto::where('estado', 1)->get();
+        $CategoriaTipoDefecto = CategoriaTipoDefecto::where('estado', 1)->get();
+
+
+        
+
+        $mesesEnEspanol = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+
+
+        return view('formulariosCalidad.evaluacionCorte', compact('mesesEnEspanol', 'CategoriaCliente', 
+                'CategoriaEstilo', 'CategoriaNoRecibo', 'CategoriaTallaCantidad', 'CategoriaTamañoMuestra', 
+                'CategoriaDefecto', 'CategoriaTipoDefecto', 'CategoriaAuditor'));
+    }
+
+    public function formEvaluacionCorte(Request $request)
+    {
+        $auditoriaEtiqueta = new ReporteAuditoriaEtiqueta();
+        $defecto = $request->input('defecto', ''); // Obtener el valor del campo 'defecto'
+        // Asignacion con relacion de modelos 
+        
+        $auditoriaEtiqueta->categoriaCliente()->associate(CategoriaCliente::find($request->input('cliente')));
+        $auditoriaEtiqueta->categoriaEstilo()->associate(CategoriaEstilo::find($request->input('estilo')));
+        $auditoriaEtiqueta->categoriaNoRecibo()->associate(CategoriaNoRecibo::find($request->input('no_recibo')));
+        $auditoriaEtiqueta->talla_cantidad_id = $request->input('talla_cantidad');
+        $auditoriaEtiqueta->tamaño_muestra_id = $request->input('muestra');
+        // Verificar si el valor es nulo o está en blanco
+        if ($defecto === null || $defecto === '') {
+            $auditoriaEtiqueta->defecto_id = '0'; // Establecer '0' como valor predeterminado
+        } else {
+            $auditoriaEtiqueta->defecto_id = $defecto; // Usar el valor ingresado
+        }
+        $auditoriaEtiqueta->categoriaTipoDefecto()->associate(CategoriaTipoDefecto::find($request->input('tipo_defecto')));
+        $auditoriaEtiqueta->estado = $request->input('estado');
+        // Guarda el registro en la base de datos
+        $auditoriaEtiqueta->save();
+        // Redirecciona de vuelta a la página con un mensaje de éxito o lo que consideres necesario
+        return back()->with('success', 'Datos guardados correctamente.');
+    }
+
 }
