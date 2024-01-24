@@ -45,6 +45,7 @@
                             </div>
                         </div>
                         <form method="POST" action="{{ route('formulariosCalidad.formAuditoriaEtiquetas') }}"> 
+                            @csrf
                             <div class="row">
                                 <div class="col">
                                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#miModal">
@@ -208,15 +209,13 @@
                                     </div>
                                     {{-- Fin del modal --}}
                                 </div>
-                            
-                                @csrf
                                 <div class="col">
                                     <div class="d-flex justify-content-end">
                                             Cliente:
                                             <select name="cliente" id="cliente" class="form-select" required title="Por favor, selecciona una opción">
                                                 <option value="">Selecciona una opción</option>
                                                 @foreach ($CategoriaCliente as $cliente)
-                                                    <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                                                    <option value="{{ $cliente->id }}" {{ old('cliente') == $cliente->id ? 'selected' : '' }}>{{ $cliente->nombre }}</option>
                                                 @endforeach
                                             </select>
                                     </div>
@@ -231,7 +230,7 @@
                                             <select name="estilo" id="estilo" class="form-select" required title="Por favor, selecciona una opción">
                                                 <option value="">Selecciona una opción</option>
                                                 @foreach ($CategoriaEstilo as $estilo)
-                                                    <option value="{{ $estilo->id }}">{{ $estilo->nombre }}</option>
+                                                <option value="{{ $estilo->id }}" {{ old('estilo') == $estilo->id ? 'selected' : '' }}>{{ $estilo->nombre }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

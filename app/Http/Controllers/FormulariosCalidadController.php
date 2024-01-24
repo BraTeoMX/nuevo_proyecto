@@ -18,27 +18,30 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class FormulariosCalidadController extends Controller
 {
+
+    // Método privado para cargar las categorías
+    private function cargarCategorias() {
+        return [
+            'CategoriaCliente' => CategoriaCliente::where('estado', 1)->get(),
+            'CategoriaEstilo' => CategoriaEstilo::where('estado', 1)->get(),
+            'CategoriaNoRecibo' => CategoriaNoRecibo::where('estado', 1)->get(),
+            'CategoriaTallaCantidad' => CategoriaTallaCantidad::where('estado', 1)->get(),
+            'CategoriaTamañoMuestra' => CategoriaTamañoMuestra::where('estado', 1)->get(),
+            'CategoriaDefecto' => CategoriaDefecto::where('estado', 1)->get(),
+            'CategoriaTipoDefecto' => CategoriaTipoDefecto::where('estado', 1)->get(),
+        ];
+    }
+
     public function auditoriaEtiquetas()
     {
-        $CategoriaCliente = CategoriaCliente::where('estado', 1)->get();
-        $CategoriaEstilo = CategoriaEstilo::where('estado', 1)->get();
-        $CategoriaNoRecibo = CategoriaNoRecibo::where('estado', 1)->get();
-        $CategoriaTallaCantidad = CategoriaTallaCantidad::where('estado', 1)->get();
-        $CategoriaTamañoMuestra = CategoriaTamañoMuestra::where('estado', 1)->get();
-        $CategoriaDefecto = CategoriaDefecto::where('estado', 1)->get();
-        $CategoriaTipoDefecto = CategoriaTipoDefecto::where('estado', 1)->get();
-
-
-        
+        $categorias = $this->cargarCategorias();
 
         $mesesEnEspanol = [
             'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
         ];
 
 
-        return view('formulariosCalidad.auditoriaEtiquetas', compact('mesesEnEspanol', 'CategoriaCliente', 
-                'CategoriaEstilo', 'CategoriaNoRecibo', 'CategoriaTallaCantidad', 'CategoriaTamañoMuestra', 
-                'CategoriaDefecto', 'CategoriaTipoDefecto'));
+        return view('formulariosCalidad.auditoriaEtiquetas', array_merge($categorias, ['mesesEnEspanol' => $mesesEnEspanol]));
     }
 
     public function formAuditoriaEtiquetas(Request $request)
@@ -63,7 +66,7 @@ class FormulariosCalidadController extends Controller
         // Guarda el registro en la base de datos
         $auditoriaEtiqueta->save();
         // Redirecciona de vuelta a la página con un mensaje de éxito o lo que consideres necesario
-        return back()->with('success', 'Datos guardados correctamente.');
+        return back()->with('success', 'Datos guardados correctamente.')->withInput();
     }
 
     public function mostrarAuditoriaEtiquetas()
